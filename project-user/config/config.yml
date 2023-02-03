@@ -1,0 +1,10 @@
+server:
+  name: "project-user"
+  addr: ":80"
+
+
+redis:
+  host: 172.20.203.29
+  port: 6379
+  password: 123456
+  db: 0

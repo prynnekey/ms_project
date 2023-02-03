@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	srv "github.com/prynnekey/ms_project/project-common"
 	_ "github.com/prynnekey/ms_project/project-user/api"
+	"github.com/prynnekey/ms_project/project-user/config"
 	"github.com/prynnekey/ms_project/project-user/router"
 )
 
@@ -12,5 +13,5 @@ func main() {
 
 	router.Init(r)
 
-	srv.Run(r, ":80", "project user")
+	srv.Run(r, config.AppConfig.SC.Addr, config.AppConfig.SC.Name)
 }

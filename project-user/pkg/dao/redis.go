@@ -4,6 +4,7 @@ import (
 	"context"
 	"time"
 
+	"github.com/prynnekey/ms_project/project-user/config"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -22,10 +23,6 @@ func (rc *RedisCache) Get(ctx context.Context, key string) (string, error) {
 }
 
 func init() {
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     "172.20.203.29:6379",
-		Password: "123456", // no password set
-		DB:       0,        // use default DB
-	})
+	rdb := redis.NewClient(config.AppConfig.ReadRedisConfig())
 	Rc = &RedisCache{rdb: rdb}
 }
