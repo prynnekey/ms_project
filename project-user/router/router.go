@@ -50,7 +50,7 @@ type gRPCConfig struct {
 // 注册gRPC
 func RegisterGrpc() *grpc.Server {
 	g := gRPCConfig{
-		Addr: config.AppConfig.GC.Addr,
+		Addr: config.AppConfig.GrpcConfig.Addr,
 		RegisterFunc: func(s *grpc.Server) {
 			loginServiceV1.RegisterLoginServiceServer(s, loginServiceV1.New())
 		},

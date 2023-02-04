@@ -18,5 +18,5 @@ func main() {
 		grpc.Stop()
 	}
 
-	srv.Run(r, config.AppConfig.SC.Addr, config.AppConfig.SC.Name, stop)
+	srv.Run(r, config.AppConfig.ServerConfig.Addr, config.AppConfig.ServerConfig.Name, stop)
 }

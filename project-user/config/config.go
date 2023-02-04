@@ -11,9 +11,9 @@ import (
 var AppConfig = InitConfig()
 
 type Config struct {
-	viper *viper.Viper
-	SC    *ServerConfig
-	GC    *GrpcConfig
+	viper        *viper.Viper
+	ServerConfig *ServerConfig
+	GrpcConfig   *GrpcConfig
 }
 
 type ServerConfig struct {
@@ -38,14 +38,14 @@ func (c *Config) ReadServerConfig() {
 	sc := &ServerConfig{}
 	sc.Name = c.viper.GetString("server.name")
 	sc.Addr = c.viper.GetString("server.addr")
-	c.SC = sc
+	c.ServerConfig = sc
 }
 
 func (c *Config) ReadGrpcConfig() {
 	gc := &GrpcConfig{}
 	gc.Name = c.viper.GetString("grpc.name")
 	gc.Addr = c.viper.GetString("grpc.addr")
-	c.GC = gc
+	c.GrpcConfig = gc
 }
 
 func InitConfig() *Config {
