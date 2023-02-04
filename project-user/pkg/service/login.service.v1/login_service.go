@@ -2,12 +2,13 @@ package login_service_v1
 
 import (
 	context "context"
-	"errors"
 	"fmt"
 	"time"
 
 	common "github.com/prynnekey/ms_project/project-common"
+	"github.com/prynnekey/ms_project/project-common/errs"
 	"github.com/prynnekey/ms_project/project-user/pkg/dao"
+	"github.com/prynnekey/ms_project/project-user/pkg/model"
 	"github.com/prynnekey/ms_project/project-user/pkg/repo"
 )
 
@@ -27,7 +28,7 @@ func (ls *LoginService) Captcha(ctx context.Context, req *CaptchaRequest) (*Capt
 	mobile := req.Mobile
 	// 2.验证参数
 	if !common.ValidateMobile(mobile) {
-		return nil, errors.New("手机号不合法")
+		return nil, errs.GrpcError(model.IllegalMobile)
 	}
 	// 3.生成验证码
 	code := common.GenerateCaptcha(6)

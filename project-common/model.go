@@ -1,14 +1,16 @@
 package common
 
+type BusinessCode int
+
 // Result 返回结果
 type Result struct {
-	Code int         `json:"code"`
-	Msg  string      `json:"msg"`
-	Data interface{} `json:"data"`
+	Code BusinessCode `json:"code"`
+	Msg  string       `json:"msg"`
+	Data interface{}  `json:"data"`
 }
 
 // NewResult 返回结果
-func NewResult(code int, msg string, data interface{}) *Result {
+func NewResult(code BusinessCode, msg string, data interface{}) *Result {
 	return &Result{
 		Code: code,
 		Msg:  msg,
@@ -22,6 +24,6 @@ func (*Result) Success(data interface{}) *Result {
 }
 
 // NewErrorResult 返回错误结果
-func (*Result) Fail(code int, msg string) *Result {
+func (*Result) Fail(code BusinessCode, msg string) *Result {
 	return NewResult(code, msg, nil)
 }

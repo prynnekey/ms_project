@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	common "github.com/prynnekey/ms_project/project-common"
-	"github.com/prynnekey/ms_project/project-user/pkg/model"
+	"github.com/prynnekey/ms_project/project-common/errs"
 	login_service_v1 "github.com/prynnekey/ms_project/project-user/pkg/service/login.service.v1"
 )
 
@@ -28,7 +28,8 @@ func (*HandlerUser) GetCaptcha() gin.HandlerFunc {
 		defer cancel()
 		cr, err := LoginServiceClient.Captcha(c, &login_service_v1.CaptchaRequest{Mobile: mobile})
 		if err != nil {
-			ctx.JSON(200, res.Fail(model.IllegalMobile, err.Error()))
+			code, msg := errs.ParseGrpcError(err)
+			ctx.JSON(200, res.Fail(code, msg))
 			return
 		}
 
