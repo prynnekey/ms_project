@@ -10,8 +10,14 @@ import (
 
 func main() {
 	r := gin.Default()
-
+	// 路由
 	router.Init(r)
 
-	srv.Run(r, config.AppConfig.SC.Addr, config.AppConfig.SC.Name)
+	// grpc服务注册
+	grpc := router.RegisterGrpc()
+	stop := func() {
+		grpc.Stop()
+	}
+
+	srv.Run(r, config.AppConfig.SC.Addr, config.AppConfig.SC.Name, stop)
 }

@@ -12,7 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Run(r *gin.Engine, addr string, srvName string) {
+func Run(r *gin.Engine, addr string, srvName string, stop func()) {
 
 	srv := http.Server{
 		Addr:    addr,
@@ -40,6 +40,9 @@ func Run(r *gin.Engine, addr string, srvName string) {
 	// 创建一个2秒超时的context
 	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
 	defer cancel()
+	if stop != nil {
+		stop()
+	}
 	// 优雅地关闭服务器，等待所有连接都关闭
 	if err := srv.Shutdown(ctx); err != nil {
 		log.Fatalf("%s Shutdown: %v", srvName, err)

@@ -13,9 +13,15 @@ var AppConfig = InitConfig()
 type Config struct {
 	viper *viper.Viper
 	SC    *ServerConfig
+	GC    *GrpcConfig
 }
 
 type ServerConfig struct {
+	Name string
+	Addr string
+}
+
+type GrpcConfig struct {
 	Name string
 	Addr string
 }
@@ -35,6 +41,13 @@ func (c *Config) ReadServerConfig() {
 	c.SC = sc
 }
 
+func (c *Config) ReadGrpcConfig() {
+	gc := &GrpcConfig{}
+	gc.Name = c.viper.GetString("grpc.name")
+	gc.Addr = c.viper.GetString("grpc.addr")
+	c.GC = gc
+}
+
 func InitConfig() *Config {
 	dir, _ := os.Getwd()
 	conf := &Config{
@@ -50,6 +63,7 @@ func InitConfig() *Config {
 
 	// 读取服务配置
 	conf.ReadServerConfig()
+	conf.ReadGrpcConfig()
 
 	return conf
 }
