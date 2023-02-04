@@ -1,6 +1,6 @@
 server:
   name: "project-user"
-  addr: ":80"
+  addr: ":8080"
 
 
 redis:
@@ -11,4 +11,4 @@ redis:
 
 grpc:
   name: "gprc-user"
-  addr: "127.0.0.1:8081"
+  addr: "127.0.0.1:8881"

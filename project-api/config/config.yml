@@ -1,0 +1,10 @@
+server:
+  name: "project-api"
+  addr: ":80"
+
+
+redis:
+  host: 172.20.204.180
+  port: 6379
+  password: 123456
+  db: 0
